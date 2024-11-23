@@ -13,9 +13,9 @@ import {
 
 import { coffees } from '../../../data.json'
 import { useCart } from '../../hooks/useCart'
-// import { QuantityInput } from '../../components/Form/QuantityInput'
-// import { TextInput } from '../../components/Form/TextInput'
-// import { Radio } from '../../components/Form/Radio'
+import { QuantityInput } from '../../components/Form/QuantityInput'
+import { TextInput } from '../../components/Form/TextInput'
+import { Radio } from '../../components/Form/Radio'
 import {
   AddressContainer,
   AddressForm,
@@ -31,7 +31,7 @@ import {
   PaymentErrorMessage,
   PaymentHeading,
   PaymentOptions,
-} from './style'
+} from './styles'
 
 type FormInputs = {
   cep: number
@@ -70,7 +70,7 @@ export function Cart() {
     removeItem,
   } = useCart()
 
-  const coffeesInCart = cart.map((item: any) => {
+  const coffeesInCart = cart.map((item) => {
     const coffeeInfo = coffees.find((coffee) => coffee.id === item.id)
 
     if (!coffeeInfo) {
@@ -83,7 +83,7 @@ export function Cart() {
     }
   })
 
-  const totalItemsPrice = coffeesInCart.reduce((previousValue: any, currentItem: any) => {
+  const totalItemsPrice = coffeesInCart.reduce((previousValue, currentItem) => {
     return (previousValue += currentItem.price * currentItem.quantity)
   }, 0)
 
@@ -136,7 +136,7 @@ export function Cart() {
             </AddressHeading>
 
             <AddressForm>
-              {/* <TextInput
+              <TextInput
                 placeholder="CEP"
                 type="number"
                 containerProps={{ style: { gridArea: 'cep' } }}
@@ -186,7 +186,7 @@ export function Cart() {
                 containerProps={{ style: { gridArea: 'state' } }}
                 error={errors.state}
                 {...register('state')}
-              /> */}
+              />
             </AddressForm>
           </AddressContainer>
 
@@ -205,7 +205,7 @@ export function Cart() {
             </PaymentHeading>
 
             <PaymentOptions>
-              {/* <div>
+              <div>
                 <Radio
                   isSelected={selectedPaymentMethod === 'credit'}
                   {...register('paymentMethod')}
@@ -232,7 +232,7 @@ export function Cart() {
                   <Money size={16} />
                   <span>Dinheiro</span>
                 </Radio>
-              </div> */}
+              </div>
 
               {errors.paymentMethod ? (
                 <PaymentErrorMessage role="alert">
@@ -248,7 +248,7 @@ export function Cart() {
         <h2>Cafés selecionados</h2>
 
         <CartTotal>
-          {coffeesInCart.map((coffee: any) => (
+          {coffeesInCart.map((coffee) => (
             <Fragment key={coffee.id}>
               <Coffee>
                 <div>
@@ -258,11 +258,11 @@ export function Cart() {
                     <span>{coffee.title}</span>
 
                     <CoffeeInfo>
-                      {/* <QuantityInput
+                      <QuantityInput
                         quantity={coffee.quantity}
                         incrementQuantity={() => handleItemIncrement(coffee.id)}
                         decrementQuantity={() => handleItemDecrement(coffee.id)}
-                      /> */}
+                      />
 
                       <button onClick={() => handleItemRemove(coffee.id)}>
                         <Trash />
